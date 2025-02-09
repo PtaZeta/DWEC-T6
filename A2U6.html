@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .nodo {
+            border: 1px solid #000;
+            padding: 10px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Creación y eliminación de Nodos</h1>
+    <button id="botonAñadir">Añadir Nodo</button>
+    <button id="botonEliminar">Eliminar Nodo</button>
+    <div id="nodo"></div>
+
+    <script>
+        document.getElementById('botonAñadir').addEventListener('click', function() {
+            var texto = prompt('Introduce el texto para el nuevo nodo:');
+            if (texto) {
+                var nuevoNodo = document.createElement('div');
+                nuevoNodo.className = 'nodo';
+                nuevoNodo.textContent = texto;
+                document.getElementById('nodo').appendChild(nuevoNodo);
+            }
+        });
+
+        document.getElementById('botonEliminar').addEventListener('click', function() {
+            var nodo = document.getElementById('nodo');
+            if (nodo.lastChild) {
+                nodo.removeChild(nodo.lastChild);
+            } else {
+                alert('No hay nodos para eliminar.');
+            }
+        });
+    </script>
+</body>
+</html>

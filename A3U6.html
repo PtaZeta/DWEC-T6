@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehículos</title>
+    <style>
+        table {
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 10px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Vehículos</h1>
+
+    <form id="formularioVehiculo">
+        <label for="marca">Marca:</label>
+        <input type="text" id="marca" name="marca" required>
+        
+        <label for="modelo">Modelo:</label>
+        <input type="text" id="modelo" name="modelo" required>
+        
+        <label for="color">Color:</label>
+        <input type="text" id="color" name="color" required>
+        
+        <label for="anioFabricacion">Año de Fabricación:</label>
+        <input type="number" id="anioFabricacion" name="anioFabricacion" required>
+        
+        <button type="submit">Agregar Vehículo</button>
+    </form>
+
+    <button id="botonGenerarTabla">Generar Tabla</button>
+    <div id="contenedorTabla"></div>
+
+    <script>
+        function Vehiculo(marca, modelo, color, anioFabricacion) {
+            this.marca = marca;
+            this.modelo = modelo;
+            this.color = color;
+            this.anioFabricacion = anioFabricacion;
+        }
+        const vehiculos = [
+            new Vehiculo('Toyota', 'Corolla', 'Rojo', 2020),
+            new Vehiculo('Honda', 'Civic', 'Azul', 2019),
+            new Vehiculo('Ford', 'Focus', 'Negro', 2018),
+            new Vehiculo('Chevrolet', 'Malibu', 'Blanco', 2021),
+            new Vehiculo('Nissan', 'Sentra', 'Gris', 2022)
+        ];
+
+        function generarTabla() {
+            var contenedorTabla = document.getElementById('contenedorTabla');
+            contenedorTabla.innerHTML = ''; 
+
+            var tabla = document.createElement('table');
+            var cabecera = document.createElement('thead');
+            var cuerpo = document.createElement('tbody');
+
+            var encabezados = ['Marca', 'Modelo', 'Color', 'Año de Fabricación'];
+            var filaCabecera = document.createElement('tr');
+            encabezados.forEach(encabezado => {
+                var th = document.createElement('th');
+                th.textContent = encabezado;
+                filaCabecera.appendChild(th);
+            });
+            cabecera.appendChild(filaCabecera);
+
+            vehiculos.forEach(vehiculo => {
+                var fila = document.createElement('tr');
+                Object.values(vehiculo).forEach(valor => {
+                    var td = document.createElement('td');
+                    td.textContent = valor;
+                    fila.appendChild(td);
+                });
+                cuerpo.appendChild(fila);
+            });
+
+            tabla.appendChild(cabecera);
+            tabla.appendChild(cuerpo);
+            contenedorTabla.appendChild(tabla);
+        }
+
+        document.getElementById('botonGenerarTabla').addEventListener('click', generarTabla);
+
+        document.getElementById('formularioVehiculo').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var marca = document.getElementById('marca').value;
+            var modelo = document.getElementById('modelo').value;
+            var color = document.getElementById('color').value;
+            var anioFabricacion = document.getElementById('anioFabricacion').value;
+
+            var nuevoVehiculo = new Vehiculo(marca, modelo, color, anioFabricacion);
+            vehiculos.push(nuevoVehiculo);
+            });
+    </script>
+</body>
+</html>
