@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Representación del DOM</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+        .node {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Representación del DOM</h1>
+    <div id="representacionDOM"></div>
+
+    <script>
+        function crearElementoNodo(nodo) {
+            var li = document.createElement('li');
+            li.textContent = nodo.nodeName;
+
+            if (nodo.childNodes.length > 0) {
+                var ul = document.createElement('ul');
+                nodo.childNodes.forEach(nodoHijo => {
+                    ul.appendChild(crearElementoNodo(nodoHijo));
+                });
+                li.appendChild(ul);
+            }
+
+            return li;
+        }
+
+        function mostrarDOM() {
+            var raiz = document.documentElement;
+            var representacionDOM = document.getElementById('representacionDOM');
+            var ul = document.createElement('ul');
+            ul.appendChild(crearElementoNodo(raiz));
+            representacionDOM.appendChild(ul);
+        }
+
+        document.addEventListener('DOMContentLoaded', mostrarDOM);
+    </script>
+</body>
+</html>

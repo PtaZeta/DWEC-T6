@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Interactiva</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <button id="añadirFila">Añadir Fila</button>
+    <table id="tabla">
+        <thead>
+            <tr>
+                <th>Columna 1</th>
+                <th>Columna 2</th>
+                <th>Columna 3</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('añadirFila').addEventListener('click', function() {
+            var tabla = document.getElementById('tabla').getElementsByTagName('tbody')[0];
+            var nuevaFila = document.createElement('tr');
+
+            for (let i = 0; i < 3; i++) {
+                var nuevaCelda = document.createElement('td');
+                nuevaCelda.textContent = 'Click para editar';
+                nuevaCelda.addEventListener('click', hacerEditable);
+                nuevaFila.appendChild(nuevaCelda);
+            }
+
+            var celdaEliminar = document.createElement('td');
+            var botonEliminar = document.createElement('button');
+            botonEliminar.textContent = 'Eliminar';
+            botonEliminar.addEventListener('click', function() {
+                tabla.removeChild(nuevaFila);
+            });
+            celdaEliminar.appendChild(botonEliminar);
+            nuevaFila.appendChild(celdaEliminar);
+
+            tabla.appendChild(nuevaFila);
+        });
+
+        function hacerEditable(event) {
+            var celda = event.target;
+            var valorOriginal = celda.textContent;
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.value = valorOriginal;
+
+            input.addEventListener('blur', function() {
+                celda.textContent = input.value;
+                celda.addEventListener('click', hacerEditable);
+            });
+
+            input.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    celda.textContent = input.value;
+                    celda.addEventListener('click', hacerEditable);
+                } else if (event.key === 'Escape') {
+                    celda.textContent = valorOriginal;
+                    celda.addEventListener('click', hacerEditable);
+                }
+            });
+
+            celda.textContent = '';
+            celda.removeEventListener('click', hacerEditable);
+            celda.appendChild(input);
+            input.focus();
+        }
+    </script>
+</body>
+</html>

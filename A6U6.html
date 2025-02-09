@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habilitar/Deshabilitar Elementos</title>
+</head>
+<body>
+    <input type="text" id="boton1" placeholder="boton 1">
+    <input type="text" id="boton2" placeholder="boton 2">
+    <input type="text" id="boton3" placeholder="boton 3">
+    <input type="text" id="boton4" placeholder="boton 4">
+    <input type="text" id="boton5" placeholder="boton 5">
+    <br><br>
+    <button onclick="desactivarActivar()">Desactivar todos</button>
+
+    <script>
+        function desactivarActivar() {
+            var botons = document.querySelectorAll('input[type="text"]');
+            botons.forEach(function(boton) {
+                boton.disabled = !boton.disabled;
+            });
+        }
+    </script>
+</body>
+</html>

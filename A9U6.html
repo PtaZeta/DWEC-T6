@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Usuarios</title>
+    <style>
+        table {
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: center;
+            border: 1px solid #000;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Usuarios</h1>
+    <form onsubmit="event.preventDefault(); agregarUsuario();">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required>
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" required>
+        <button type="submit">Agregar usuario</button>
+    </form>
+    <table id="tablaUsuarios" border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        function agregarUsuario() {
+            var nombre = document.getElementById('nombre').value;
+            var edad = document.getElementById('edad').value;
+
+            if (nombre && edad) {
+                var tabla = document.getElementById('tablaUsuarios').getElementsByTagName('tbody')[0];
+                var nuevaFila = document.createElement('tr');
+
+                var celdaNombre = document.createElement('td');
+                celdaNombre.textContent = nombre;
+                nuevaFila.appendChild(celdaNombre);
+
+                var celdaEdad = document.createElement('td');
+                celdaEdad.textContent = edad;
+                nuevaFila.appendChild(celdaEdad);
+
+                var celdaAcciones = document.createElement('td');
+                var botonEliminar = document.createElement('button');
+                botonEliminar.textContent = 'Eliminar';
+                botonEliminar.onclick = function() {
+                    this.parentNode.parentNode.remove();
+                };
+                celdaAcciones.appendChild(botonEliminar);
+                nuevaFila.appendChild(celdaAcciones);
+
+                tabla.appendChild(nuevaFila);
+
+                document.getElementById('nombre').value = '';
+                document.getElementById('edad').value = '';
+            }
+        }
+    </script>
+</body>
+</html>

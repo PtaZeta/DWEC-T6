@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocultar/Mostrar Párrafo</title>
+    <style>
+        .visible {
+            display: block;
+        }
+        .oculto {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <p id="parrafo1" class="visible">Este es el párrafo 1.</p>
+    <p id="parrafo2" class="visible">Este es el párrafo 2.</p>
+    <p id="parrafo3" class="visible">Este es el párrafo 3.</p>
+    <button onclick="alternarParrafo('parrafo1')">Ocultar/Mostrar Párrafo 1</button>
+    <button onclick="alternarParrafo('parrafo2')">Ocultar/Mostrar Párrafo 2</button>
+    <button onclick="alternarParrafo('parrafo3')">Ocultar/Mostrar Párrafo 3</button>
+    <script>
+        function alternarParrafo(idParrafo) {
+            var parrafo = document.getElementById(idParrafo);
+            if (parrafo.classList.contains('visible')) {
+                parrafo.classList.remove('visible');
+                parrafo.classList.add('oculto');
+            } else {
+                parrafo.classList.remove('oculto');
+                parrafo.classList.add('visible');
+            }
+        }
+    </script>
+</body>
+</html>

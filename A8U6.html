@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambio de Imagen</title>
+    <style>
+        img {
+            width: 300px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <img id="imagen" src="imagen1.jpg" alt="Imagen original">
+
+    <script>
+        var imagen = document.getElementById('imagen');
+
+        imagen.addEventListener('mouseover', () => {
+            imagen.setAttribute('src', 'imagen2.jpg');
+        });
+
+        imagen.addEventListener('mouseout', () => {
+            imagen.setAttribute('src', 'imagen1.jpg');
+        });
+    </script>
+</body>
+</html>
